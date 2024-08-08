@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import { TextField, IconButton, InputAdornment, Container, Box, List, ListItem, ListItemText, Fade } from '@mui/material';
+import { TextField, IconButton, InputAdornment, Container, Box, List, ListItem, ListItemText, Fade, Divider } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 
-const SearchComponent = ({ itemNames }) => {
+const SearchComponent = ({ itemNames, items }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleChange = (e) => {
@@ -70,15 +70,41 @@ const SearchComponent = ({ itemNames }) => {
                             boxShadow: 3,
                             borderRadius: 2,
                             zIndex: 1000,
+                            mt: 1,
+                            borderRadius: 2,
                         }}
                     >
                         <Fade in={!!searchTerm}>
                             <List>
                                 {filteredItems.length > 0 ? (
                                     filteredItems.map((item, index) => (
-                                        <ListItem button key={index}>
-                                            <ListItemText primary={item} />
-                                        </ListItem>
+                                        <React.Fragment key={index}>
+                                            <ListItem 
+                                                sx={{ 
+                                                    borderBottom: '1px solid #DDDDDD',
+                                                    '&:hover': {
+                                                        backgroundColor: '#F5F5F5',
+                                                        cursor: 'pointer'
+                                                    }
+                                                }}
+                                            >
+                                                <ListItemText 
+                                                    primary={item} 
+                                                    primaryTypographyProps={{ fontWeight: 'bold' }}
+                                                />
+                                                <Box sx={{ flexGrow: 1 }} />
+                                                {
+                                                    items.filter(i => i.itemName === item).map((i, index) => (
+                                                        <ListItemText 
+                                                            key={index} 
+                                                            secondary={`Item Numbers: ${i.itemNumbers}`} 
+                                                            secondaryTypographyProps={{ color: '#888888' }}
+                                                        />
+                                                    ))
+                                                }
+                                            </ListItem>
+                                            <Divider />
+                                        </React.Fragment>
                                     ))
                                 ) : (
                                     <ListItem>

@@ -32,7 +32,7 @@ const Page = () => {
       <Typography variant='h2' textAlign={'center'} marginY={5} fontWeight={'bold'} color={'tomato'}>
           Pantry Tracker
       </Typography>
-      <SearchComponent itemNames={itemNames}/>
+      <SearchComponent itemNames={itemNames} items={items}/>
       <List items={items} />
       <Box
         sx={{
