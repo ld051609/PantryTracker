@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Grid, Box } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addDoc, doc, setDoc, collection } from "firebase/firestore"; 
+import db from '@/services/firebaseConfig';
 const ItemForm = () => {
     const [formData, setFormData] = useState({
         itemName: '',
@@ -27,8 +28,22 @@ const ItemForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
+        // Add the items 
+        const docRef = collection(db, 'food_items');
+        const payload = {
+            itemName: formData.itemName,
+            itemNumbers: formData.itemNumbers,
+        };
+        await addDoc(docRef, payload);
+        // Show alert if item added successfully
+        alert('Item added successfully');
+        // Reset form data
+        setFormData({
+            itemName: '',
+            itemNumbers: '',
+        });
 
     };
 
