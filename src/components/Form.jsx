@@ -3,7 +3,15 @@ import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Grid, Box } from '@mui/material';
 import { addDoc, doc, setDoc, collection } from "firebase/firestore"; 
 import db from '@/services/firebaseConfig';
+import { useRouter } from 'next/navigation';
+ 
 const ItemForm = () => {
+    const router = useRouter();
+
+    function handleNavigate (path){
+        router.push(path);
+    };
+
     const [formData, setFormData] = useState({
         itemName: '',
         itemNumbers: '',
@@ -27,7 +35,7 @@ const ItemForm = () => {
             [name]: '',
         });
     };
-
+    
     const handleSubmit = async(e) => {
         e.preventDefault();
         // Add the items 
@@ -44,9 +52,11 @@ const ItemForm = () => {
             itemName: '',
             itemNumbers: '',
         });
-
+        handleNavigate('/');
+        
+        
     };
-
+    
     return (
         <Container maxWidth="sm" style={{ marginTop: '3rem', padding: '2rem' }}>
             <Typography variant="h3" marginY={4} textAlign="center" color="tomato" fontWeight={600} letterSpacing={7} >

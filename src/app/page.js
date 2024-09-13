@@ -6,6 +6,7 @@ import { TextField, IconButton, InputAdornment, Container, Box, Typography, Butt
 import AddIcon from '@mui/icons-material/Add';
 import { collection, getDocs } from "firebase/firestore";
 import db from '@/services/firebaseConfig';
+import Navbar from '@/components/Navbar';
 
 const Page = () => {
   // TODO: Extract the items from the firestore
@@ -29,6 +30,7 @@ const Page = () => {
 
   return (
     <div>
+      <Navbar />
       <Typography variant='h2' textAlign={'center'} marginY={5} fontWeight={'bold'} color={'tomato'}>
           Pantry Tracker
       </Typography>
